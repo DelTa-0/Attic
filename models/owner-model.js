@@ -13,4 +13,4 @@ const ownerSchema=mongoose.Schema({
 
 });
 
-module.exports=mongoose.model("pwner",ownerSchema);
+module.exports=mongoose.model("owner",ownerSchema);
