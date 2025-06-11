@@ -2,31 +2,29 @@ const express = require('express');
 const router=express.Router();
 const ownerModel = require('../models/owner-model');
 
-router.get('/',function(req,res){
-    res.send("hey");
-})
-
-console.log(process.env.NODE_ENV);
-
 
 if(process.env.NODE_ENV==="development"){
    router.post('/create',async function(req,res){
     let owners=await ownerModel.find();
     if(owners.length>0){
-    return res
-    .send(503)
-    .send("you dont have permission");}
+    return res.send(503).send("you dont have permission");}
     
     let {fullname,email,password}=req.body;
-    let createdowner=await ownerModel.create({
+    let createdOwner=await ownerModel.create({
     fullname,
     email,
     password,
     });
-    res.status(201).send(createdowner);
+    res.status(201).send(createdOwner);
 })
     
 }
+router.get('/',function(req,res){
+    res.send("hey");
+})
+
+
+
 
 
 module.exports=router;
