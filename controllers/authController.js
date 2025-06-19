@@ -26,9 +26,26 @@ module.exports.registerUser= async function(req,res){
         })
         })
     
-    res.send(user);
+    
     }
     catch(err){
         console.log(err.message);
     };
 };
+
+//login
+module.exports.loginUser=async function(req,res){
+    let {email,password}=req.body;
+    let user=await userModel.findOne({email:email});
+    if(!user) return res.send("email or password incorrect");
+    bcrypt.compare(password,user.password,function(err,result){
+        if(result){
+            let token=generateToken(user);
+            res.cookie("token",token);
+            res.send("you can login");
+        }
+        else{
+            return res.send("email or password incorrect");
+        }
+    })
+}
