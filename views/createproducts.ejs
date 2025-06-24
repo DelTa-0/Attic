@@ -1,13 +1,12 @@
 <%- include('./partials/header') %>
-
-    <% if(success.length>0){ %>
+<% if(success.length>0){ %>
         <div class="absolute top-5 left-1/2 -translate-x-1/2 -translate-y-1/2 p-3 rounded-md bg-blue-500">
             <span class="inline-block mt-1 mb-1 text-white">
                 <%= success %>
             </span>
         </div>
         <% } %>
-
+   
             <div class="min-h-screen flex flex-col">
                 <div class="container px-10 py-20 flex flex-grow">
                     <div class="w-[25%] flex h-screen flex-col items-start">
