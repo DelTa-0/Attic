@@ -5,7 +5,8 @@ const productModel = require('../models/product-model');
 const router=express.Router();
 
 router.get("/",function(req,res){
-    res.render("index", { error: req.flash("error") });
+    let error=req.flash("error");
+    res.render("index",{error,loggedin:false})
 })
 
 router.get("/shop",isLoggedin,async function(req,res){
