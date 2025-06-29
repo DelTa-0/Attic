@@ -23,7 +23,13 @@ router.get("/shop",isLoggedin,async function(req,res){
 router.get("/cart",isLoggedin,async function(req,res){
     let user=await userModel.findOne({email:req.user.email})
     .populate("cart");
-    res.render("cart", {user});
+    let totalbill = 0;
+    user.cart.forEach(function(item){
+      const itemTotal = Number(item.price) + 20 - Number(item.discount);
+      totalbill += itemTotal;
+    })
+    
+    res.render("cart", {user,totalbill});
 })
 
 router.get("/addtocart/:productid",isLoggedin,async function(req,res){
