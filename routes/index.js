@@ -21,11 +21,9 @@ router.get("/shop",isLoggedin,async function(req,res){
 })
 
 router.get("/cart",isLoggedin,async function(req,res){
-    
-    res.render("cart", { 
-  
-  error: req.flash("error") 
-});
+    let user=await userModel.findOne({email:req.user.email})
+    .populate("cart");
+    res.render("cart", {user});
 })
 
 router.get("/addtocart/:productid",isLoggedin,async function(req,res){
